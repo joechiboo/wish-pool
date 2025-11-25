@@ -11,7 +11,9 @@
       "Bash(npm install:*)",
       "Bash(npm run build:*)",
       "Bash(git add:*)",
-      "Bash(git commit -m \"$(cat <<''EOF''\nfeat: 初始化 Vue 3 許願池專案\n\n- Vue 3 + Vite + TypeScript 架構\n- Vue Router 路由設定\n- Pinia 狀態管理\n- Tailwind CSS 4 樣式\n- GitHub Actions 自動部署到 GitHub Pages\n- 完整的願望功能：瀏覽、發布、祝福\n- 響應式設計與動畫效果\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+      "Bash(git commit -m \"$(cat <<''EOF''\nfeat: 初始化 Vue 3 許願池專案\n\n- Vue 3 + Vite + TypeScript 架構\n- Vue Router 路由設定\n- Pinia 狀態管理\n- Tailwind CSS 4 樣式\n- GitHub Actions 自動部署到 GitHub Pages\n- 完整的願望功能：瀏覽、發布、祝福\n- 響應式設計與動畫效果\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []
