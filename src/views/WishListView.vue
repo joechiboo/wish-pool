@@ -8,12 +8,12 @@ const wishStore = useWishStore()
 </script>
 
 <template>
-  <div class="py-8 px-4">
+  <div class="pt-24 pb-8 px-4">
     <div class="max-w-6xl mx-auto">
       <!-- Header -->
-      <div class="mb-8">
+      <div class="mb-8 text-center">
         <h1 class="text-3xl font-bold text-gray-800 mb-2">
-          <span class="mr-2">🌟</span>願望池
+          <span class="mr-2">🔮</span>探索願望
         </h1>
         <p class="text-gray-600">
           探索大家的願望，為他們送上祝福

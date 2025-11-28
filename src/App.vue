@@ -1,7 +1,13 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
+import { computed } from 'vue'
+import { RouterView, useRoute } from 'vue-router'
 import AppHeader from '@/components/layout/AppHeader.vue'
 import AppFooter from '@/components/layout/AppFooter.vue'
+
+const route = useRoute()
+
+// Only show footer on non-home pages
+const showFooter = computed(() => route.name !== 'home')
 </script>
 
 <template>
@@ -10,6 +16,6 @@ import AppFooter from '@/components/layout/AppFooter.vue'
     <main class="flex-1">
       <RouterView />
     </main>
-    <AppFooter />
+    <AppFooter v-if="showFooter" />
   </div>
 </template>

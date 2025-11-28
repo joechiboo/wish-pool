@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
 
-const authStore = useAuthStore()
 const isMenuOpen = ref(false)
 
 function toggleMenu() {
@@ -12,49 +10,29 @@ function toggleMenu() {
 </script>
 
 <template>
-  <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
-    <nav class="max-w-6xl mx-auto px-4 py-3">
+  <header class="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-black/50 to-transparent">
+    <nav class="max-w-6xl mx-auto px-4 py-4">
       <div class="flex items-center justify-between">
         <!-- Logo -->
-        <RouterLink to="/" class="flex items-center gap-2 text-xl font-bold text-purple-600 hover:text-purple-700 transition-colors">
+        <RouterLink to="/" class="flex items-center gap-2 text-xl font-bold text-white hover:text-yellow-300 transition-colors">
           <span class="text-2xl">🌟</span>
           <span>許願池</span>
         </RouterLink>
 
         <!-- Desktop Navigation -->
         <div class="hidden md:flex items-center gap-6">
-          <RouterLink to="/wishes" class="text-gray-600 hover:text-purple-600 transition-colors">
-            願望池
+          <RouterLink to="/wishes/create" class="text-white/90 hover:text-yellow-300 transition-colors font-medium">
+            ✨ 許願
           </RouterLink>
-          <RouterLink to="/wishes/create" class="text-gray-600 hover:text-purple-600 transition-colors">
-            許願
+          <RouterLink to="/wishes" class="text-white/90 hover:text-yellow-300 transition-colors font-medium">
+            🔮 探索願望
           </RouterLink>
-
-          <template v-if="authStore.isAuthenticated">
-            <RouterLink to="/profile" class="text-gray-600 hover:text-purple-600 transition-colors">
-              個人中心
-            </RouterLink>
-            <button
-              @click="authStore.logout"
-              class="text-gray-600 hover:text-red-500 transition-colors"
-            >
-              登出
-            </button>
-          </template>
-          <template v-else>
-            <RouterLink
-              to="/login"
-              class="px-4 py-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors"
-            >
-              登入
-            </RouterLink>
-          </template>
         </div>
 
         <!-- Mobile Menu Button -->
         <button
           @click="toggleMenu"
-          class="md:hidden p-2 text-gray-600 hover:text-purple-600"
+          class="md:hidden p-2 text-white hover:text-yellow-300"
           aria-label="選單"
         >
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -65,46 +43,21 @@ function toggleMenu() {
       </div>
 
       <!-- Mobile Navigation -->
-      <div v-show="isMenuOpen" class="md:hidden mt-4 pb-2 space-y-2">
-        <RouterLink
-          to="/wishes"
-          class="block px-4 py-2 text-gray-600 hover:bg-purple-50 hover:text-purple-600 rounded-lg"
-          @click="isMenuOpen = false"
-        >
-          願望池
-        </RouterLink>
+      <div v-show="isMenuOpen" class="md:hidden mt-4 pb-2 space-y-2 bg-black/70 rounded-xl backdrop-blur-md p-4">
         <RouterLink
           to="/wishes/create"
-          class="block px-4 py-2 text-gray-600 hover:bg-purple-50 hover:text-purple-600 rounded-lg"
+          class="block px-4 py-3 text-white hover:bg-white/20 hover:text-yellow-300 rounded-lg transition-colors"
           @click="isMenuOpen = false"
         >
-          許願
+          ✨ 許願
         </RouterLink>
-
-        <template v-if="authStore.isAuthenticated">
-          <RouterLink
-            to="/profile"
-            class="block px-4 py-2 text-gray-600 hover:bg-purple-50 hover:text-purple-600 rounded-lg"
-            @click="isMenuOpen = false"
-          >
-            個人中心
-          </RouterLink>
-          <button
-            @click="authStore.logout(); isMenuOpen = false"
-            class="block w-full text-left px-4 py-2 text-gray-600 hover:bg-red-50 hover:text-red-500 rounded-lg"
-          >
-            登出
-          </button>
-        </template>
-        <template v-else>
-          <RouterLink
-            to="/login"
-            class="block px-4 py-2 text-center bg-purple-600 text-white rounded-lg hover:bg-purple-700"
-            @click="isMenuOpen = false"
-          >
-            登入
-          </RouterLink>
-        </template>
+        <RouterLink
+          to="/wishes"
+          class="block px-4 py-3 text-white hover:bg-white/20 hover:text-yellow-300 rounded-lg transition-colors"
+          @click="isMenuOpen = false"
+        >
+          🔮 探索願望
+        </RouterLink>
       </div>
     </nav>
   </header>

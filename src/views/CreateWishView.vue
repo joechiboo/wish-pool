@@ -2,20 +2,19 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useWishStore } from '@/stores/wish'
-import { useAuthStore } from '@/stores/auth'
 import type { Category } from '@/types'
 import { CATEGORIES } from '@/types'
 
 const router = useRouter()
 const wishStore = useWishStore()
-const authStore = useAuthStore()
 
 const title = ref('')
 const description = ref('')
 const category = ref<Category>('other')
-const isAnonymous = ref(false)
+const isAnonymous = ref(true)
 const isSubmitting = ref(false)
 const error = ref('')
+const nickname = ref('')
 
 const categories = Object.entries(CATEGORIES) as [Category, typeof CATEGORIES[Category]][]
 
@@ -38,8 +37,8 @@ async function handleSubmit() {
     description: description.value.trim() || undefined,
     category: category.value,
     isAnonymous: isAnonymous.value,
-    userId: authStore.user?.id || 'guest',
-    userName: isAnonymous.value ? undefined : authStore.user?.nickname
+    userId: 'guest-' + Date.now(),
+    userName: isAnonymous.value ? undefined : (nickname.value.trim() || '許願者')
   })
 
   if (result.success) {
@@ -53,14 +52,30 @@ async function handleSubmit() {
 </script>
 
 <template>
-  <div class="py-8 px-4">
+  <div class="pt-24 pb-8 px-4">
     <div class="max-w-xl mx-auto">
       <h1 class="text-3xl font-bold text-gray-800 mb-2 text-center">
         <span class="mr-2">✨</span>許下願望
       </h1>
-      <p class="text-gray-600 text-center mb-8">
+      <p class="text-gray-600 text-center mb-4">
         寫下你的心願，讓大家為你送上祝福
       </p>
+
+      <!-- How it works -->
+      <div class="bg-purple-50 rounded-xl p-4 mb-6">
+        <div class="flex items-start gap-3">
+          <span class="text-2xl">💡</span>
+          <div class="text-sm text-purple-800">
+            <p class="font-medium mb-1">如何使用許願池？</p>
+            <ol class="list-decimal list-inside space-y-1 text-purple-700">
+              <li>寫下你的願望和故事</li>
+              <li>選擇分類讓更多人看見</li>
+              <li>發布後等待大家的祝福</li>
+              <li>也可以透過 LINE Pay 為願望添加祝福金</li>
+            </ol>
+          </div>
+        </div>
+      </div>
 
       <form @submit.prevent="handleSubmit" class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
         <!-- Title -->
@@ -114,6 +129,21 @@ async function handleSubmit() {
               {{ value.emoji }} {{ value.label }}
             </button>
           </div>
+        </div>
+
+        <!-- Nickname (when not anonymous) -->
+        <div v-if="!isAnonymous" class="mb-6">
+          <label for="nickname" class="block text-sm font-medium text-gray-700 mb-2">
+            你的暱稱
+          </label>
+          <input
+            id="nickname"
+            v-model="nickname"
+            type="text"
+            maxlength="20"
+            placeholder="輸入暱稱 (選填)"
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all"
+          />
         </div>
 
         <!-- Anonymous Toggle -->

@@ -49,16 +49,8 @@ function handleBless() {
 </script>
 
 <template>
-  <div class="py-8 px-4">
+  <div class="pt-24 pb-8 px-4">
     <div class="max-w-2xl mx-auto">
-      <!-- Back Link -->
-      <RouterLink
-        to="/wishes"
-        class="inline-flex items-center gap-2 text-gray-600 hover:text-purple-600 mb-6"
-      >
-        ← 返回願望池
-      </RouterLink>
-
       <!-- Wish Detail -->
       <article v-if="wish" class="bg-white rounded-2xl shadow-lg overflow-hidden">
         <div class="p-8">
@@ -119,7 +111,7 @@ function handleBless() {
           to="/wishes"
           class="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 text-white rounded-full hover:bg-purple-700"
         >
-          返回願望池
+          探索其他願望
         </RouterLink>
       </div>
     </div>
