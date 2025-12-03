@@ -401,4 +401,4 @@ VITE_API_URL=https://wish-pool-api.vercel.app
 ---
 
 *文檔版本：v1.0*
-*最後更新：2024/01*
+*最後更新：2025/12*
